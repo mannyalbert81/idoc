@@ -1,3 +1,5 @@
+<?php require_once 'config/global.php';?> 
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -8,7 +10,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Menu</a>
+      <a class="navbar-brand" href="#">  <p> <strong> <?php echo CLIENTE?>  </strong>  </p>
+</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -19,6 +22,18 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-modal-window" ><?php echo " Administración" ;?> </span> <span class="caret"></span></a>
           <ul class="dropdown-menu">
+        	<li><a href="index.php?controller=Categorias&action=index">Categorias</a>
+		    </li>
+			<li><a href="index.php?controller=SubCategorias&action=index">Subcategorias</a>
+			</li>
+			<li><a href="index.php?controller=TiposDocumentos&action=index">Tipos de Documentos</a>
+			</li>
+			<li><a href="index.php?controller=CartonDocumentos&action=index">Cartones de Documentos</a>
+			</li>
+			<li><a href="index.php?controller=ClienteProveedor&action=index">Clientes / Proveedores</a>
+			</li>
+			<li role="separator" class="divider"></li>
+			
         	<li><a href="index.php?controller=Usuarios&action=index">Usuarios</a>
 		    </li>
 			<li><a href="index.php?controller=Roles&action=index">Roles de Usuario</a>
@@ -32,21 +47,9 @@
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-file" ><?php echo " Gestión Documental" ;?> </span> <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-file" ><?php echo " Busquedas" ;?> </span> <span class="caret"></span></a>
           <ul class="dropdown-menu">
-          <li><a href="index.php?controller=Categorias&action=index">Categorias</a>
-		    </li>
-			<li><a href="index.php?controller=SubCategorias&action=index">Subcategorias</a>
-			</li>
-			<li><a href="index.php?controller=TiposDocumentos&action=index">Tipos de Documentos</a>
-			</li>
-			<li><a href="index.php?controller=CartonDocumentos&action=index">Cartones de Documentos</a>
-			</li>
-			<li><a href="index.php?controller=ClienteProveedor&action=index">Clientes / Proveedores</a>
-			</li>
-			<li><a href="index.php?controller=Soat&action=index">SOAT</a>
-			</li>
-			<li role="separator" class="divider"></li>
+          
 			<li><a href="index.php?controller=Documentos&action=index">Busqueda de Documentos</a>
 			</li>
 			<li><a href="index.php?controller=DocumentosClienteProveedor&action=index">Busqueda Categorias + Cliente / Proveedor</a>
@@ -109,40 +112,56 @@
 		  </ul>
         </li>
         
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-modal-window" ><?php echo " Control" ;?> </span> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="index.php?controller=CartonDocumentos&action=cierre">Cierre de Cartones</a>
+			</li>
+		  </ul>
+        </li>
+        
+        
         
       </ul>
-      <form class="navbar-form navbar-right" role="search" action="<?php echo $helper->url("Documentos","Buscador");	
-				?>"  method="post" >
-  		      		      
       
-        <div class="form-group">
-          
-		   <select id="criterio_etapa" name="criterio_etapa" class="form-control">
-				<option value="0"  > --TODOS--</option>
-				<option value="1"  >Etapa I</option>
-				<option value="2"  >Etapa II</option>
-				
-		 </select>
-		  
-          <input type="text" class="form-control" name="contenido_busqueda" id="criterio_busqueda" placeholder="texto a buscar">
-          
-           <select id="criterio_busqueda" name="criterio_busqueda" class="form-control">
-				<option value="0"  > --TODOS--</option>
-				<option value="1"  >Ruc Cliente/Proveedor</option>
-				<option value="2"  >Nombre Cliente/Proveedor</option>
-				<option value="3"  >Número Carton</option>
-				<option value="4"  >Número de Tarjeta</option>
-				<option value="5"  >Número de Documento</option>
-				<option value="6"  >Ciudad Emisión</option>
-				<option value="7"  >Tipo de Documento</option>
-				<option value="8"  >Nombre Emision</option>
-				<option value="10"  >Número de Cheque</option>
-				<option value="11"  >Id Documento - Solo Numeros</option>
-		 </select>
-					
-        </div>
-        <button type="submit"  name="btn_buscar" class="btn btn-default"><span class="glyphicon glyphicon-search	" ><?php echo " Buscar" ;?> </span></button>
-      </form>
+      	<form class="navbar-form navbar-right" role="search"    action="<?php echo $helper->url("Documentos","Buscador");?>"  method="post" >
+  		
+			  		<div class="input-group">
+					  <div class="input-group-addon">
+					      		<select id="criterio_etapa" style="font-size:90%;"   name="criterio_etapa" class="form-control">
+									<option value="0"  > --TODOS--</option>
+									<option value="1"  >Etapa I</option>
+									<option value="2"  >Etapa II</option>
+								</select>
+						
+							<input type="text" class="form-control" name="contenido_busqueda" id="criterio_busqueda" placeholder="texto a buscar">
+							<select id="criterio_busqueda" name="criterio_busqueda" style="font-size:90%;" class="form-control">
+										<option value="0"  > --TODOS--</option>
+										<option value="1"  >Ruc Cliente/Proveedor</option>
+										<option value="2"  >Nombre Cliente/Proveedor</option>
+										<option value="3"  >Número Carton</option>
+										<option value="4"  >Número de Tarjeta</option>
+										<option value="5"  >Número de Documento</option>
+										<option value="6"  >Ciudad Emisión</option>
+										<option value="7"  >Tipo de Documento</option>
+										<option value="8"  >Nombre Emision</option>
+										<option value="10"  >Número de Cheque</option>
+										<option value="11"  >Id Documento - Solo Numeros</option>
+							 </select>
+							
+							
+							<button type="submit"  style="font-size:90%;"  name="btn_buscar" class="btn btn-default"><span class="glyphicon glyphicon-search	" ><?php echo " Buscar" ;?> </span></button>	
+							
+					  </div>
+					  	
+					</div>
+			  		
+			  		
+			  		
+			  		
+			  		
+			      </form>
+		
       
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

@@ -54,59 +54,50 @@ $(document).ready(function(){
   
   <div class="row head" >
   
-  <div style=" margin-top: 20px; "   class="col-xs-6 col-md-8"  >
+  <div style=" margin-top: 20px; "   class="col-xs-4 col-md-4"  >
   <img src="view/images/logo_adocument.png" class="img-responsive" alt="Responsive image"  width="350" height="350">
   <br>
   </div>
+  <div  class="col-xs-4 col-md-4">
   
+  </div>
   
-  
-  
-  
-  <div  style="margin-top: 20px;" class="col-xs-6 col-md-4">
- 		<div class="margin-top: 20px;" class="col-xs-6 col-md-4">
- 		<p> <strong> <?php echo CLIENTE?>  </strong>  </p>
- 		</div>	
-		<?php  
-			 $status = session_status();
-			 if  (isset( $_SESSION['nombre_usuario'] ))  {  
-		?>
-		
-		 	 <div class="dropdown">
-				  <button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-user" ><?php echo " Bienvenid@  ".$_SESSION['nombre_usuario'];?></span>
-				  <span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu">
-				    <li><a href="index.php?controller=Usuarios&action=cerrar_sesion">Cerrar Sesión</a></li>
-				    <li><a href="index.php?controller=Usuarios&action=Actualiza">Actualizar Datos de Usuario</a></li>
-				    <li><a href="#">Conectado desde: <?php echo $_SESSION['ip_usuario']?></a></li>
-				  </ul>
-				  
-			</div>
-		 	
-		 	
-		 	
-		    
-		    <?php  ?> 
-		<?php 
-			 }
-			 else 
-			 {     ?>
-		
-		
-			<div class="dropdown">
-					  <button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-lock" > Iniciar Sesión </span>
+  <div  style="margin-top: 20px;" class="col-xs-4 col-md-4">
+ 		
+ 		
+ 		<div  class="col-xs-12 col-md-12">
+			<?php  
+				 $status = session_status();
+				 if  (isset( $_SESSION['nombre_usuario'] ))  {  ?>
+			 	 	    <div class="dropdown">
+							  <button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-user" ><?php echo " Bienvenid@  ".$_SESSION['nombre_usuario'];?></span>
+							  <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu">
+							    <li><a href="index.php?controller=Usuarios&action=cerrar_sesion">Cerrar Sesión</a></li>
+							    <li><a href="index.php?controller=Usuarios&action=Actualiza">Actualizar Datos de Usuario</a></li>
+							    <li><a href="#">Conectado desde: <?php echo $_SESSION['ip_usuario']?></a></li>
+					  		</ul>
 					  
-					  </button>
-					  
-				</div>
-		<?php }
+							</div>
 				
-		 ?>
-			</div>  
+				
+			
+			      	 
+		<?php } else {?>
+				<div class="dropdown">
+					<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-lock" > <a href="index.php?controller=Usuarios&action=Loguear">Iniciar Sesion</a></span>
+					</button>
+				</div>
+		<?php } ?>
+		
+		
+		</div>  
   
   </div>
         
+</div>
+
 </div>
 
 </body>

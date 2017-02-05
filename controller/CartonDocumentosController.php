@@ -14,7 +14,7 @@ class CartonDocumentosController extends ControladorBase{
 		//Creamos el objeto usuario
 		$carton_documentos = new CartonDocumentosModel();
 		//Conseguimos todos los usuarios
-		$columnas = "carton_documentos.numero_carton_documentos, carton_documentos.id_carton_documentos";
+		$columnas = "carton_documentos.numero_carton_documentos, carton_documentos.id_carton_documentos, carton_documentos.estado_carton_documentos";
 	    $tablas = " carton_documentos , documentos_legal";
 		$where   = "documentos_legal.id_carton_documentos = carton_documentos.id_carton_documentos GROUP BY carton_documentos.numero_carton_documentos, carton_documentos.ID_carton_documentos";
 		$id = " carton_documentos.numero_carton_documentos";
@@ -65,6 +65,67 @@ class CartonDocumentosController extends ControladorBase{
 		
 	
 	}
+
+	
+	
+	public function cierre(){
+	
+	
+		//Creamos el objeto usuario
+		$carton_documentos = new CartonDocumentosModel();
+		//Conseguimos todos los usuarios
+		$columnas = "carton_documentos.numero_carton_documentos, carton_documentos.id_carton_documentos, carton_documentos.estado_carton_documentos";
+		$tablas = " carton_documentos , documentos_legal";
+		$where   = "documentos_legal.id_carton_documentos = carton_documentos.id_carton_documentos GROUP BY carton_documentos.numero_carton_documentos, carton_documentos.ID_carton_documentos";
+		$id = " carton_documentos.numero_carton_documentos";
+		$resultCar=$carton_documentos-> getCondiciones($columnas ,$tablas , $where, $id);
+	
+		$resultEdit = "";
+	
+	
+		session_start();
+	
+	
+		if (isset(  $_SESSION['usuario_usuario']) )
+		{
+	
+			$nombre_controladores = "CartonDocumentos";
+			$id_rol= $_SESSION['id_rol'];
+			$resultPer = $carton_documentos->getPermisosVer("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
+	
+			if (!empty($resultPer))
+			{
+	
+	
+				$this->view("CierreCartonDocumentos",array(
+						"resultCar"=>$resultCar, "resultEdit" =>$resultEdit
+							
+				));
+	
+	
+			}
+			else
+			{
+				$this->view("Error",array(
+						"resultado"=>"No Tiene Permisos de Acceso a Clientes/Proveedor"
+				));
+	
+	
+			}
+	
+		}
+		else
+		{
+			$this->view("ErrorSesion",array(
+					"resultSet"=>""
+	
+			));
+	
+		}
+	
+	
+	}
+	
 	
 	public function Update()
 	{
@@ -199,6 +260,46 @@ class CartonDocumentosController extends ControladorBase{
 		}		
 	
 	}
+	
+	
+	
+	public function cerrar()
+	{
+		
+		$carton_documentos = new CartonDocumentosModel();
+		session_start();
+	
+		$nombre_controladores = "CartonDocumentos";
+		$id_rol= $_SESSION['id_rol'];
+		$resultPer = $carton_documentos->getPermisosEditar("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
+			
+		if (!empty($resultPer))
+		{
+	
+			$_destino_id = "";
+				
+	
+	
+			if (isset ($_GET["id_carton_documentos"]) )
+			{
+				
+			 		
+			}
+	
+			
+		}
+		else
+		{
+			$this->view("Error",array(
+					"resultado"=>"No tiene Permisos de Editar Clientes/Proveedor"
+	
+			));
+	
+	
+		}
+	
+	}
+	
 	
 	
 	
